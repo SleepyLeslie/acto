@@ -25,7 +25,7 @@
       }
     ]
   },
-  "crd_name": "cassandradatacenterxs.cassandra.datastax.com",
+  "crd_name": "xcassandradatacenters.cassandra.datastax.com",
   "kubernetes_version": "v1.29.0",
   "seed_custom_resource": "ac/cass-operator/cr.yaml"
 }
