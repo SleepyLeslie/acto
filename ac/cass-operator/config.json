@@ -1,0 +1,31 @@
+{
+  "deploy": {
+    "steps": [
+      {
+        "apply": {
+          "file": "ac/cass-operator/cert-manager.yaml",
+          "namespace": null
+        }
+      },
+      {
+        "wait": {
+          "duration": 10
+        }
+      },
+      {
+        "apply": {
+          "file": "ac/cass-operator/bundle.yaml",
+          "operator": true
+        }
+      },
+      {
+        "apply": {
+          "file": "ac/cass-operator/cassdc.patched.crd.yaml"
+        }
+      }
+    ]
+  },
+  "crd_name": "cassandradatacenterxs.cassandra.datastax.com",
+  "kubernetes_version": "v1.29.0",
+  "seed_custom_resource": "ac/cass-operator/cr.yaml"
+}
