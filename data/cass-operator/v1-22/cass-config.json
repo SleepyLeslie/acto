@@ -2,6 +2,524 @@
   "properties": {
     "cassandra-yaml": {
       "properties": {
+        "hinted_handoff_disabled_datacenters": {
+
+        },
+        "hints_directory": {
+          "type": "string",
+          "default": "/var/lib/cassandra/hints",
+          "enum": [
+            "/var/lib/cassandra/hints",
+            "/tmp",
+            "/nonexistent",
+            ""
+          ]
+        },
+        "data_file_directories": {
+          "type": "array",
+          "default": ["/var/lib/cassandra/data"],
+          "enum": [
+            ["/var/lib/cassandra/data"],
+            ["/var/lib/cassandra/data", "/tmp"],
+            ["/tmp", "/nonexistent"],
+            [],
+            ["/nonexistent"]
+          ]
+        },
+        "local_system_data_file_directory": {
+          "type": "string",
+          "enum": [
+            "/var/lib/cassandra/data",
+            "/tmp",
+            "/nonexistent",
+            ""
+          ]
+        },
+        "commitlog_directory": {
+          "type": "string",
+          "default": "/var/lib/cassandra/commitlog",
+          "enum": [
+            "/var/lib/cassandra/commitlog",
+            "/tmp",
+            "/nonexistent",
+            "/"
+          ]
+        },
+        "cdc_raw_directory": {
+          "type": "string",
+          "default": "/var/lib/cassandra/cdc_raw",
+          "enum": [
+            "/var/lib/cassandra/cdc_raw",
+            "/tmp",
+            "/nonexistent",
+            "/"
+          ]
+        },
+        "saved_caches_directory": {
+          "type": "string",
+          "default": "/var/lib/cassandra/saved_caches",
+          "enum": [
+            "/var/lib/cassandra/saved_caches",
+            "/tmp",
+            "/nonexistent",
+            "/"
+          ]
+        },
+        "storage_port": {
+          "type": "integer",
+          "default": 7000,
+          "enum": [
+            7000,
+            0,
+            7001,
+            17000
+          ]
+        },
+        "ssl_storage_port": {
+          "type": "integer",
+          "default": 7001,
+          "enum": [
+            7001,
+            0,
+            17001
+          ]
+        },
+        "listen_address": {
+          "type": "string",
+          "default": "localhost",
+          "enum": [
+            "localhost",
+            "0.0.0.0",
+            "does.not.resolve",
+            "1.1.1.1",
+            ""
+          ]
+        },
+        "listen_interface": {
+          "type": "string",
+          "default": "eth0",
+          "enum": [
+            "eth0",
+            "ens3",
+            "lo",
+            ""
+          ]
+        },
+        "broadcast_address": {
+          "type": "string",
+          "default": "1.2.3.4",
+          "enum": [
+            "1.2.3.4",
+            "",
+            "localhost"
+          ]
+        },
+        "native_transport_port": {
+          "type": "integer",
+          "default": 9042,
+          "enum": [
+            9042,
+            0,
+            7000,
+            19042
+          ]
+        },
+        "rpc_address": {
+          "type": "string",
+          "default": "localhost",
+          "enum": [
+            "localhost",
+            "0.0.0.0",
+            "does.not.resolve",
+            "1.1.1.1",
+            ""
+          ]
+        },
+        "rpc_interface": {
+          "type": "string",
+          "default": "eth0",
+          "enum": [
+            "eth0",
+            "ens3",
+            "lo",
+            ""
+          ]
+        },
+        "broadcast_rpc_address": {
+          "type": "string",
+          "default": "1.2.3.4",
+          "enum": [
+            "1.2.3.4",
+            "",
+            "localhost"
+          ]
+        },
+        "server_encryption_options": {
+          "type": "object",
+          "properties": {
+            "internode_encryption": {
+              "type": "string",
+              "default": "none",
+              "enum": [
+                "none",
+                "dc",
+                "rack",
+                "all",
+                "INVALID"
+              ]
+            },
+            "legacy_ssl_storage_port_enabled": {
+              "type": "boolean"
+            },
+            "keystore": {
+              "type": "string",
+              "default": "conf/.keystore",
+              "enum": [
+                "conf/.keystore",
+                "/tmp",
+                "/nonexistent",
+                ""
+              ]
+            },
+            "keystore_password": {
+              "type": "string",
+              "default": "cassandra",
+              "enum": [
+                "cassandra",
+                "ACTOKEY",
+                ""
+              ]
+            },
+            "require_client_auth": {
+              "type": "boolean"
+            },
+            "truststore": {
+              "type": "string",
+              "default": "conf/.truststore",
+              "enum": [
+                "conf/.truststore",
+                "/tmp",
+                "/nonexistent",
+                ""
+              ]
+            },
+            "truststore_password": {
+              "type": "string",
+              "default": "cassandra",
+              "enum": [
+                "cassandra",
+                "ACTOKEY",
+                ""
+              ]
+            },
+            "require_endpoint_verification": {
+              "type": "boolean"
+            },
+            "cipher_suites": {
+              "type": "array",
+              "default": [
+                "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                "TLS_RSA_WITH_AES_128_GCM_SHA256",
+                "TLS_RSA_WITH_AES_128_CBC_SHA",
+                "TLS_RSA_WITH_AES_256_CBC_SHA"
+              ],
+              "enum": [
+                [
+                  "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                  "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                  "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                  "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                  "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                  "TLS_RSA_WITH_AES_128_GCM_SHA256",
+                  "TLS_RSA_WITH_AES_128_CBC_SHA",
+                  "TLS_RSA_WITH_AES_256_CBC_SHA"
+                ],
+                [
+                  "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+                ],
+                [],
+                [
+                  "ACTOKEY"
+                ]
+              ]
+            }
+          }
+        },
+        "client_encryption_options": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "keystore": {
+              "type": "string",
+              "default": "conf/.keystore",
+              "enum": [
+                "conf/.keystore",
+                "/tmp",
+                "/nonexistent",
+                ""
+              ]
+            },
+            "keystore_password": {
+              "type": "string",
+              "default": "cassandra",
+              "enum": [
+                "cassandra",
+                "ACTOKEY",
+                ""
+              ]
+            },
+            "ssl_context_factory": {
+              "type": "object",
+              "properties": {
+                "class_name": {
+                  "type": "string",
+                  "default": "org.apache.cassandra.security.DefaultSslContextFactory",
+                  "enum": [
+                    "org.apache.cassandra.security.DefaultSslContextFactory",
+                    "org.apache.cassandra.security.PEMBasedSslContextFactory",
+                    "ACTOKEY"
+                  ]
+                }
+              }
+            },
+            "require_client_auth": {
+              "type": "boolean"
+            },
+            "truststore": {
+              "type": "string",
+              "default": "conf/.truststore",
+              "enum": [
+                "conf/.truststore",
+                "/tmp",
+                "/nonexistent",
+                ""
+              ]
+            },
+            "truststore_password": {
+              "type": "string",
+              "default": "cassandra",
+              "enum": [
+                "cassandra",
+                "ACTOKEY",
+                ""
+              ]
+            },
+            "require_endpoint_verification": {
+              "type": "boolean"
+            },
+            "cipher_suites": {
+              "type": "array",
+              "default": [
+                "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                "TLS_RSA_WITH_AES_128_GCM_SHA256",
+                "TLS_RSA_WITH_AES_128_CBC_SHA",
+                "TLS_RSA_WITH_AES_256_CBC_SHA"
+              ],
+              "enum": [
+                [
+                  "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384",
+                  "TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256",
+                  "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+                  "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+                  "TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA",
+                  "TLS_RSA_WITH_AES_128_GCM_SHA256",
+                  "TLS_RSA_WITH_AES_128_CBC_SHA",
+                  "TLS_RSA_WITH_AES_256_CBC_SHA"
+                ],
+                [
+                  "TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384"
+                ],
+                [],
+                [
+                  "ACTOKEY"
+                ]
+              ]
+            }
+          }
+        },
+        "transparent_data_encryption_options": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean",
+            },
+            "chunk_length_kb": {
+              "type": "integer",
+              "default": 64,
+              "enum": [
+                64,
+                0,
+                -1000
+              ]
+            }
+          }
+        },
+        "audit_logging_options": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "logger": {
+              "type": "string",
+              "enum": [
+                "BinAuditLogger",
+                "FileAuditLogger"
+              ]
+            },
+            "audit_logs_dir": {
+              "type": "string",
+              "enum": [
+                "/tmp",
+                "/nonexistent",
+                ""
+              ]
+            }
+          }
+        },
+        "full_query_logging_options": {
+          "type": "object",
+          "properties": {
+            "log_dir": {
+              "type": "string",
+              "enum": [
+                "/tmp/cassandrafullquerylog",
+                "/tmp",
+                "/",
+                ""
+              ]
+            },
+            "roll_cycle": {
+              "type": "string",
+              "default": "HOURLY",
+              "enum": [
+                "HOURLY",
+                "MINUTELY",
+                "DAILY",
+                "ACTOKEY"
+              ]
+            },
+            "block": {
+              "type": "boolean"
+            },
+            "max_queue_wait": {
+              "type": "integer",
+              "default": 268435456,
+              "enum": [
+                134217728,
+                0,
+                -9999999999
+              ]
+            },
+            "max_log_size": {
+              "type": "integer",
+              "default": 17179869184,
+              "enum": [
+                34359738368,
+                0,
+                -9999999999
+              ]
+            },
+            "archive_command": {
+              "type": "string",
+              "default": "",
+              "enum": [
+                "",
+                "/usr/bin/stat %path",
+                "/nonexistent"
+              ]
+            },
+            "max_archive_retries": {
+              "type": "integer",
+              "default": 10,
+              "enum": [
+                10,
+                0,
+                -1
+              ]
+            }
+          }
+        },
+        "table_properties_warned": {
+          "type": "array",
+          "default": [],
+          "enum": [
+            [],
+            ["caching"],
+            ["ACTOKEY"],
+            ["speculative_retry", "ACTOKEY"]
+          ]
+        },
+        "table_properties_ignored": {
+          "type": "array",
+          "default": [],
+          "enum": [
+            [],
+            ["caching"],
+            ["ACTOKEY"],
+            ["speculative_retry", "ACTOKEY"]
+          ]
+        },
+        "table_properties_disallowed": {
+          "type": "array",
+          "default": [],
+          "enum": [
+            [],
+            ["caching"],
+            ["ACTOKEY"],
+            ["speculative_retry", "ACTOKEY"]
+          ]
+        },
+        "read_consistency_levels_disallowed": {
+          "type": "array",
+          "default": [],
+          "enum": [
+            [],
+            ["ALL"],
+            ["ACTOKEY"],
+            ["ONE", "ACTOKEY"]
+          ]
+        },
+        "read_consistency_levels_warned": {
+          "type": "array",
+          "default": [],
+          "enum": [
+            [],
+            ["ALL"],
+            ["ACTOKEY"],
+            ["ONE", "ACTOKEY"]
+          ]
+        },
+        "write_consistency_levels_disallowed": {
+          "type": "array",
+          "default": [],
+          "enum": [
+            [],
+            ["ALL"],
+            ["ACTOKEY"],
+            ["ONE", "ACTOKEY"]
+          ]
+        },
+        "read_consistency_levels_warned": {
+          "type": "array",
+          "default": [],
+          "enum": [
+            [],
+            ["ALL"],
+            ["ACTOKEY"],
+            ["ONE", "ACTOKEY"]
+          ]
+        },
         "allocate_tokens_for_local_replication_factor": {
           "enum": [
             0,
